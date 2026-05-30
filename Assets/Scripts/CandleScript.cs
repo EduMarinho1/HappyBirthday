@@ -15,7 +15,7 @@ public class CandleScript : MonoBehaviour
 
             if (cakeScript != null)
             {
-                cakeScript.candles++;
+                cakeScript.AddCandle();
 
                 Debug.Log("Candles: " + cakeScript.candles);
             }
