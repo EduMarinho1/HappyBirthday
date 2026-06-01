@@ -2,8 +2,10 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!78 &1
 TagManager:
-  serializedVersion: 2
-  tags: []
+  serializedVersion: 3
+  tags:
+  - Cake
+  - Candle
   layers:
   - Default
   - TransparentFX
@@ -12,12 +14,12 @@ TagManager:
   - Water
   - UI
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Floor
+  - Walls
+  - Objects
+  - ObjectsOnTopOfOtherObjects
+  - Characters
+  - Player
   - 
   - 
   - 
@@ -41,3 +43,33 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Floor
+    uniqueID: 3259374361
+    locked: 0
+  - name: Walls
+    uniqueID: 1474414039
+    locked: 0
+  - name: Objects
+    uniqueID: 3648896529
+    locked: 0
+  - name: ObjectsOnTopOfOtherObjects
+    uniqueID: 3779204039
+    locked: 0
+  - name: Characters
+    uniqueID: 1729239135
+    locked: 0
+  - name: Player
+    uniqueID: 4183424087
+    locked: 0
+  - name: AboveAll
+    uniqueID: 1399801095
+    locked: 0
+  m_RenderingLayers:
+  - Default
+  - Floor
+  - Walls
+  - Objects
+  - ObjectsOnTopOfOtheObjects
+  - Characters
+  - Player
+  m_MigratedRenderPipelines: []

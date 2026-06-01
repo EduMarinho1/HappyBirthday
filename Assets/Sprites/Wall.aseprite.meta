@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: d6250f5053fd1544d831af4335622d1c
+guid: 3ae4fef2bc156e849aaed6cf17a40cb9
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -36,7 +36,7 @@ ScriptedImporter:
     spriteMeshType: 1
     alignment: 0
     spritePivot: {x: 0.5, y: 0.5}
-    spritePixelsToUnits: 32
+    spritePixelsToUnits: 16
     spriteBorder: {x: 0, y: 0, z: 0, w: 0}
     spriteGenerateFallbackPhysicsShape: 0
     generateCubemap: 6
@@ -76,7 +76,7 @@ ScriptedImporter:
     importHiddenLayers: 0
     layerImportMode: 1
     defaultPivotSpace: 0
-    defaultPivotAlignment: 7
+    defaultPivotAlignment: 0
     customPivotPosition: {x: 0.5, y: 0.5}
     mosaicPadding: 4
     spritePadding: 0
@@ -91,7 +91,7 @@ ScriptedImporter:
     importHiddenLayers: 0
     layerImportMode: 1
     defaultPivotSpace: 0
-    defaultPivotAlignment: 7
+    defaultPivotAlignment: 0
     customPivotPosition: {x: 0.5, y: 0.5}
     mosaicPadding: 4
     spritePadding: 0
@@ -102,7 +102,7 @@ ScriptedImporter:
     generateIndividualEvents: 1
     generateSpriteAtlas: 1
   importFileNodeState: 1
-  platformSettingsDirtyTick: 639159205630396324
+  platformSettingsDirtyTick: 639159268799136231
   textureAssetName: 
   singleSpriteImportData:
   - name: 
@@ -127,9 +127,9 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
   animatedSpriteImportData:
-  - name: Table
+  - name: Wall
     originalName: 
-    pivot: {x: 0.5, y: -0.29999998}
+    pivot: {x: 0.5, y: 0.5}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     customData: 
@@ -137,9 +137,9 @@ ScriptedImporter:
       serializedVersion: 2
       x: 4
       y: 4
-      width: 96
-      height: 50
-    spriteID: 25cb639309f1a7646af0299c03f1c8c3
+      width: 16
+      height: 16
+    spriteID: 2009947a3a070dd41964acf28c4ba3c6
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -153,25 +153,25 @@ ScriptedImporter:
   asepriteLayers:
   - layerIndex: 0
     uuid:
-      value0: 593506430
+      value0: 405905958
       value1: 0
       value2: 0
       value3: 0
     guid: 0
-    name: Table
+    name: Wall
     layerFlags: 0
     layerType: 0
     blendMode: 0
     cells:
-    - name: Table
+    - name: Wall
       frameIndex: 0
       additiveSortOrder: 0
       cellRect:
         x: 0
-        y: 15
-        width: 96
-        height: 50
-      spriteId: 25cb639309f1a7646af0299c03f1c8c3
+        y: 0
+        width: 16
+        height: 16
+      spriteId: 2009947a3a070dd41964acf28c4ba3c6
     linkedCells: []
     tileCells: []
     tileSetIndex: 0
@@ -217,5 +217,5 @@ ScriptedImporter:
   generatePhysicsShape: 0
   secondarySpriteTextures: []
   spritePackingTag: 
-  canvasSize: {x: 96, y: 96}
-  previousTextureSize: {x: 128, y: 64}
+  canvasSize: {x: 16, y: 16}
+  previousTextureSize: {x: 32, y: 32}

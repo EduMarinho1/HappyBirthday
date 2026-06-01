@@ -13,6 +13,10 @@ PrefabInstance:
       value: Cake
       objectReference: {fileID: 0}
     - target: {fileID: -2253911629886400664, guid: c77cd889e39b83543a75cd6f5e63d576, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: -2253911629886400664, guid: c77cd889e39b83543a75cd6f5e63d576, type: 3}
       propertyPath: m_TagString
       value: Cake
       objectReference: {fileID: 0}
