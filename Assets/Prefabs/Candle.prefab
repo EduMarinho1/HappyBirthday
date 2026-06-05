@@ -16,6 +16,14 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Candle
       objectReference: {fileID: 0}
+    - target: {fileID: 3626916397498700004, guid: fa1d77689843a284bb9ab9ee42d78abe, type: 3}
+      propertyPath: m_SortingLayer
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3626916397498700004, guid: fa1d77689843a284bb9ab9ee42d78abe, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -515763257
+      objectReference: {fileID: 0}
     - target: {fileID: 7878350319992209165, guid: fa1d77689843a284bb9ab9ee42d78abe, type: 3}
       propertyPath: m_LocalPosition.x
       value: -4.53

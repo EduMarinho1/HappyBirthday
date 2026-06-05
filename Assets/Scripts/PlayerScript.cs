@@ -4,6 +4,9 @@ public class PlayerScript : MonoBehaviour
 {
     public float speed = 3f;
 
+    private bool onFastPad = false;
+    private bool onSlowPad = false;
+
     private Animator animator;
     private string currentAnimation;
 
@@ -24,6 +27,17 @@ public class PlayerScript : MonoBehaviour
 
     void Update()
     {
+        float currentSpeed = speed;
+
+        if (onSlowPad)
+        {
+            currentSpeed = speed / 3f;
+        }
+        else if (onFastPad)
+        {
+            currentSpeed = speed * 2f;
+        }
+
         Vector3 movement = Vector3.zero;
 
         if (Input.GetKey(KeyCode.W))
@@ -57,19 +71,22 @@ public class PlayerScript : MonoBehaviour
                 case Direction.Up:
                     PlayAnimation("IdleUp");
                     break;
+
                 case Direction.Down:
                     PlayAnimation("IdleDown");
                     break;
+
                 case Direction.Left:
                     PlayAnimation("IdleLeft");
                     break;
+
                 case Direction.Right:
                     PlayAnimation("IdleRight");
                     break;
             }
         }
 
-        transform.position += movement.normalized * speed * Time.deltaTime;
+        transform.position += movement.normalized * currentSpeed * Time.deltaTime;
     }
 
     private void PlayAnimation(string animationName)
@@ -79,5 +96,31 @@ public class PlayerScript : MonoBehaviour
 
         currentAnimation = animationName;
         animator.Play(animationName);
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("FastPad"))
+        {
+            onFastPad = true;
+        }
+
+        if (other.CompareTag("SlowPad"))
+        {
+            onSlowPad = true;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.CompareTag("FastPad"))
+        {
+            onFastPad = false;
+        }
+
+        if (other.CompareTag("SlowPad"))
+        {
+            onSlowPad = false;
+        }
     }
 }

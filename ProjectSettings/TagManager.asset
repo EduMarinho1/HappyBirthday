@@ -6,6 +6,10 @@ TagManager:
   tags:
   - Cake
   - Candle
+  - FastPad
+  - SlowPad
+  - WaveDestroyer
+  - Ingredient
   layers:
   - Default
   - TransparentFX
