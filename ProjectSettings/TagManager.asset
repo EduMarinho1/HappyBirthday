@@ -10,6 +10,7 @@ TagManager:
   - SlowPad
   - WaveDestroyer
   - Ingredient
+  - Button
   layers:
   - Default
   - TransparentFX

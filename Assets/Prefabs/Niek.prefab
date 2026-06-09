@@ -146,4 +146,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3308a628353a9f4d826c0f09c5636e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CharacterSoundScript
-  soundToPlay: {fileID: 8300000, guid: d5134e877aea2644699fc1f96c3b187a, type: 3}
+  soundToPlay: {fileID: 8300000, guid: 342cc8ade3f93ce418e52a89e7ef716f, type: 3}
