@@ -12,6 +12,10 @@ TagManager:
   - Ingredient
   - Button
   - FireTrace
+  - DinahLeg
+  - DinahTorso
+  - DinahHead
+  - DinahMinigamePickup
   layers:
   - Default
   - TransparentFX
