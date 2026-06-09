@@ -6,7 +6,7 @@ public class MissedButtonScript : MonoBehaviour
     {
         Debug.Log("Hit: " + other.name);
 
-        if (other.CompareTag("Button"))
+        if (other.CompareTag("Button") || other.CompareTag("FireTrace"))
         {
             Destroy(other.gameObject);
         }

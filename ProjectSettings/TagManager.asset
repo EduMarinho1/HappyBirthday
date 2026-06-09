@@ -11,6 +11,7 @@ TagManager:
   - WaveDestroyer
   - Ingredient
   - Button
+  - FireTrace
   layers:
   - Default
   - TransparentFX
@@ -56,6 +57,9 @@ TagManager:
     locked: 0
   - name: Objects
     uniqueID: 3648896529
+    locked: 0
+  - name: ObjectBetweenObjects
+    uniqueID: 231408249
     locked: 0
   - name: ObjectsOnTopOfOtherObjects
     uniqueID: 3779204039

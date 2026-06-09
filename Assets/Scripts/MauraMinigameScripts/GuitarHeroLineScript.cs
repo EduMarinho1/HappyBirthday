@@ -8,7 +8,10 @@ public class GuitarHeroLineScript : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Button"))
+        if (
+            other.CompareTag("Button") ||
+            other.CompareTag("FireTrace")
+        )
         {
             onLine = true;
             currentButton = other.gameObject;
@@ -17,7 +20,10 @@ public class GuitarHeroLineScript : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.CompareTag("Button"))
+        if (
+            other.CompareTag("Button") ||
+            other.CompareTag("FireTrace")
+        )
         {
             onLine = false;
 

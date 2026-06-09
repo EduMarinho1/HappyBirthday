@@ -10,6 +10,14 @@ public class StartMauraMinigameScript : MonoBehaviour
 
     private AudioSource audioSource;
 
+    private float musicTimer = 0f;
+
+    public GameObject wallBlockMaura;
+
+    public GameObject guitarHeroBaseRed;
+    public GameObject guitarHeroBaseGreen;
+    public GameObject guitarHeroBaseBlue;
+
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
@@ -22,6 +30,44 @@ public class StartMauraMinigameScript : MonoBehaviour
         audioSource.playOnAwake = false;
     }
 
+    void Update()
+    {
+        if (!started)
+            return;
+
+        musicTimer += Time.deltaTime;
+
+        if (musicTimer >= 75.3f && audioSource.isPlaying)
+        {
+            audioSource.Stop();
+        }
+
+        if (musicTimer >= 76f)
+        {
+            if (wallBlockMaura != null)
+            {
+                Destroy(wallBlockMaura);
+            }
+
+            if (guitarHeroBaseRed != null)
+            {
+                Destroy(guitarHeroBaseRed);
+            }
+
+            if (guitarHeroBaseGreen != null)
+            {
+                Destroy(guitarHeroBaseGreen);
+            }
+
+            if (guitarHeroBaseBlue != null)
+            {
+                Destroy(guitarHeroBaseBlue);
+            }
+
+            Destroy(gameObject);
+        }
+    }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (!other.CompareTag("Player"))
@@ -32,10 +78,10 @@ public class StartMauraMinigameScript : MonoBehaviour
 
         started = true;
 
-        if (soundToPlay != null)
-        {
-            audioSource.PlayOneShot(soundToPlay);
-        }
+        musicTimer = 0f;
+
+        audioSource.clip = soundToPlay;
+        audioSource.Play();
 
         GuitarHeroButtonScript[] buttons =
             GetComponentsInChildren<GuitarHeroButtonScript>();

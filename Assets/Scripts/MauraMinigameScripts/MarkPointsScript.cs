@@ -66,6 +66,36 @@ public class MarkPointsScript : MonoBehaviour
 
         UpdateFeedbackTimers();
 
+        CheckFireTrace(
+            redLine1,
+            redLine2,
+            redLine3,
+            KeyCode.I,
+            "Red",
+            redFeedback,
+            ref redFeedbackTimer
+        );
+
+        CheckFireTrace(
+            greenLine1,
+            greenLine2,
+            greenLine3,
+            KeyCode.J,
+            "Green",
+            greenFeedback,
+            ref greenFeedbackTimer
+        );
+
+        CheckFireTrace(
+            blueLine1,
+            blueLine2,
+            blueLine3,
+            KeyCode.N,
+            "Blue",
+            blueFeedback,
+            ref blueFeedbackTimer
+        );
+
         if (Input.GetKeyDown(KeyCode.I) && redCooldown <= 0)
         {
             CheckColorAndDestroy(
@@ -128,6 +158,64 @@ public class MarkPointsScript : MonoBehaviour
         }
     }
 
+    private void CheckFireTrace(
+        GuitarHeroLineScript line1,
+        GuitarHeroLineScript line2,
+        GuitarHeroLineScript line3,
+        KeyCode key,
+        string color,
+        SpriteRenderer feedbackRenderer,
+        ref float feedbackTimer
+    )
+    {
+        GameObject fireTrace = null;
+
+        if (
+            line1.currentButton != null &&
+            line1.currentButton.CompareTag("FireTrace") &&
+            line1.currentButton == line2.currentButton
+        )
+        {
+            fireTrace = line1.currentButton;
+        }
+        else if (
+            line1.currentButton != null &&
+            line1.currentButton.CompareTag("FireTrace") &&
+            line1.currentButton == line3.currentButton
+        )
+        {
+            fireTrace = line1.currentButton;
+        }
+        else if (
+            line2.currentButton != null &&
+            line2.currentButton.CompareTag("FireTrace") &&
+            line2.currentButton == line3.currentButton
+        )
+        {
+            fireTrace = line2.currentButton;
+        }
+
+        if (fireTrace == null)
+            return;
+
+        if (Input.GetKey(key))
+        {
+            Debug.Log("Excellent " + color);
+
+            feedbackRenderer.sprite = excellentSprite;
+        }
+        else
+        {
+            Debug.Log("Missed " + color);
+
+            feedbackRenderer.sprite = missSprite;
+        }
+
+        feedbackTimer = 0.5f;
+
+        Destroy(fireTrace);
+    }
+
     private void CheckColorAndDestroy(
         GuitarHeroLineScript line1,
         GuitarHeroLineScript line2,
@@ -138,6 +226,20 @@ public class MarkPointsScript : MonoBehaviour
         ref float feedbackTimer
     )
     {
+        if (
+            (line1.currentButton != null &&
+             line1.currentButton.CompareTag("FireTrace")) ||
+
+            (line2.currentButton != null &&
+             line2.currentButton.CompareTag("FireTrace")) ||
+
+            (line3.currentButton != null &&
+             line3.currentButton.CompareTag("FireTrace"))
+        )
+        {
+            return;
+        }
+
         int count = 0;
 
         if (line1.onLine) count++;
