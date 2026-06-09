@@ -18,6 +18,12 @@ public class DinahHeadScript : MonoBehaviour
             return;
         }
 
+        if (other.CompareTag("Wall"))
+        {
+            snake.KillSnake();
+            return;
+        }
+
         if (other.CompareTag("DinahTorso"))
         {
             if (snake == null)
@@ -42,7 +48,7 @@ public class DinahHeadScript : MonoBehaviour
             if (other.transform == firstTorso)
                 return;
 
-            Destroy(snake.gameObject);
+            snake.KillSnake();
         }
     }
 }

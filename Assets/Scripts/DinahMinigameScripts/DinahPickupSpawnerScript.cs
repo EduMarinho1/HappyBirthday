@@ -6,6 +6,8 @@ public class DinahPickupSpawnerScript : MonoBehaviour
 
     public float spawnInterval = 3f;
 
+    public DinahSnakeScript snake;
+
     private float timer;
 
     private BoxCollider2D spawnArea;
@@ -17,19 +19,23 @@ public class DinahPickupSpawnerScript : MonoBehaviour
         timer = spawnInterval;
     }
 
-void Update()
-{
-    timer -= Time.deltaTime;
-
-    if (timer <= 0f)
+    void Update()
     {
-        Debug.Log("Spawning pickup");
+        if (snake == null)
+            return;
 
-        SpawnPickup();
+        if (!snake.gameStarted)
+            return;
 
-        timer = spawnInterval;
+        timer -= Time.deltaTime;
+
+        if (timer <= 0f)
+        {
+            SpawnPickup();
+
+            timer = spawnInterval;
+        }
     }
-}
 
     private void SpawnPickup()
     {
@@ -57,7 +63,8 @@ void Update()
         Instantiate(
             pickupPrefab,
             spawnPosition,
-            Quaternion.identity
+            Quaternion.identity,
+            transform
         );
     }
 }

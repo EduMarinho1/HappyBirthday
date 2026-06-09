@@ -9,11 +9,17 @@ public class DinahSnakeScript : MonoBehaviour
 
     public float segmentSpacing = 0.3f;
 
+    public GameObject objectToDestroy1;
+    public GameObject objectToDestroy2;
+    public GameObject objectToDestroy3;
+
     private List<Transform> segments = new List<Transform>();
 
     private Vector2 direction = Vector2.right;
 
     private List<Vector3> previousPositions = new List<Vector3>();
+
+    public bool gameStarted = false;
 
     void Start()
     {
@@ -22,6 +28,9 @@ public class DinahSnakeScript : MonoBehaviour
 
     void Update()
     {
+        if (!gameStarted)
+            return;
+
         HandleInput();
 
         RefreshSegments();
@@ -113,5 +122,25 @@ public class DinahSnakeScript : MonoBehaviour
         );
 
         RefreshSegments();
+    }
+
+    public void KillSnake()
+    {
+        if (objectToDestroy1 != null)
+        {
+            Destroy(objectToDestroy1);
+        }
+
+        if (objectToDestroy2 != null)
+        {
+            Destroy(objectToDestroy2);
+        }
+
+        if (objectToDestroy3 != null)
+        {
+            Destroy(objectToDestroy3);
+        }
+
+        Destroy(gameObject);
     }
 }
