@@ -18,7 +18,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3626916397498700004, guid: 78fee4b3f2931cd4e8af8fba64f915d8, type: 3}
       propertyPath: m_SortingLayer
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 3626916397498700004, guid: 78fee4b3f2931cd4e8af8fba64f915d8, type: 3}
       propertyPath: m_SortingLayerID
@@ -100,7 +100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3308a628353a9f4d826c0f09c5636e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CharacterSoundScript
-  soundToPlay: {fileID: 0}
+  soundToPlay: {fileID: 8300000, guid: a8fd14e710cc3ad49b82eda1626c766c, type: 3}
 --- !u!61 &2041738870464792931
 BoxCollider2D:
   m_ObjectHideFlags: 0

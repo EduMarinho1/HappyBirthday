@@ -10,6 +10,11 @@ public class GuardVisionScript : MonoBehaviour
 
     [Header("Audio")]
     public AudioClip caughtSound;
+    public AudioClip reachedCharacterSound;
+
+    [Header("Objects To Destroy When Reached")]
+    public GameObject objectToDestroy1;
+    public GameObject objectToDestroy2;
 
     [Header("Timing")]
     public float minClosedTime = 2f;
@@ -21,34 +26,62 @@ public class GuardVisionScript : MonoBehaviour
     public float gracePeriod = 0.3f;
 
     private SpriteRenderer spriteRenderer;
+    private AudioSource audioSource;
 
     private bool detectionTriggered = false;
+    private bool playerReachedCharacter = false;
 
     public bool CanDetectPlayer { get; private set; }
 
     private void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+
+        audioSource = GetComponent<AudioSource>();
+
+        if (audioSource == null)
+        {
+            audioSource = gameObject.AddComponent<AudioSource>();
+        }
+
+        audioSource.playOnAwake = false;
+
+        if (eyesClosedSprite != null)
+        {
+            spriteRenderer.sprite = eyesClosedSprite;
+        }
+
         StartCoroutine(VisionLoop());
     }
 
     private IEnumerator VisionLoop()
     {
-        while (true)
+        while (!playerReachedCharacter)
         {
             // Eyes closed
             CanDetectPlayer = false;
             detectionTriggered = false;
-            spriteRenderer.sprite = eyesClosedSprite;
+
+            if (eyesClosedSprite != null)
+            {
+                spriteRenderer.sprite = eyesClosedSprite;
+            }
 
             yield return new WaitForSeconds(
                 Random.Range(minClosedTime, maxClosedTime)
             );
 
-            // Eyes open
-            spriteRenderer.sprite = eyesOpenSprite;
+            if (playerReachedCharacter)
+            {
+                yield break;
+            }
 
-            // Grace period
+            // Eyes open
+            if (eyesOpenSprite != null)
+            {
+                spriteRenderer.sprite = eyesOpenSprite;
+            }
+
             yield return new WaitForSeconds(gracePeriod);
 
             CanDetectPlayer = true;
@@ -60,8 +93,10 @@ public class GuardVisionScript : MonoBehaviour
 
             while (timer < remainingOpenTime)
             {
-                if (detectionTriggered)
+                if (detectionTriggered || playerReachedCharacter)
+                {
                     break;
+                }
 
                 timer += Time.deltaTime;
                 yield return null;
@@ -76,6 +111,9 @@ public class GuardVisionScript : MonoBehaviour
         if (detectionTriggered)
             return;
 
+        if (playerReachedCharacter)
+            return;
+
         detectionTriggered = true;
 
         StopAllCoroutines();
@@ -86,17 +124,62 @@ public class GuardVisionScript : MonoBehaviour
     {
         CanDetectPlayer = false;
 
-        spriteRenderer.sprite = mouthOpenSprite;
+        if (mouthOpenSprite != null)
+        {
+            spriteRenderer.sprite = mouthOpenSprite;
+        }
 
         if (caughtSound != null)
         {
-            AudioSource.PlayClipAtPoint(caughtSound, transform.position);
+            audioSource.PlayOneShot(caughtSound);
 
             yield return new WaitForSeconds(caughtSound.length);
         }
 
-        spriteRenderer.sprite = eyesClosedSprite;
+        if (!playerReachedCharacter)
+        {
+            if (eyesClosedSprite != null)
+            {
+                spriteRenderer.sprite = eyesClosedSprite;
+            }
 
-        StartCoroutine(VisionLoop());
+            StartCoroutine(VisionLoop());
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        Debug.Log("Something touched the character: " + collision.gameObject.name);
+
+        if (!collision.gameObject.CompareTag("Player"))
+            return;
+
+        Debug.Log("Player reached character!");
+
+        playerReachedCharacter = true;
+
+        StopAllCoroutines();
+
+        CanDetectPlayer = false;
+
+        if (mouthOpenSprite != null)
+        {
+            spriteRenderer.sprite = mouthOpenSprite;
+        }
+
+        if (reachedCharacterSound != null)
+        {
+            audioSource.PlayOneShot(reachedCharacterSound);
+        }
+
+        if (objectToDestroy1 != null)
+        {
+            Destroy(objectToDestroy1);
+        }
+
+        if (objectToDestroy2 != null)
+        {
+            Destroy(objectToDestroy2);
+        }
     }
 }

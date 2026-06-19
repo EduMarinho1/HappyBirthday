@@ -5,17 +5,8 @@ public class FieldOfViewScript : MonoBehaviour
 {
     public GuardVisionScript guard;
 
-    [Header("Push Settings")]
-    public float pushSpeed = 3f;
-
-    private GameObject player;
     private bool playerInside = false;
-    private bool currentlyPushing = false;
-
-    private void Start()
-    {
-        player = GameObject.FindGameObjectWithTag("Player");
-    }
+    private bool detectionRunning = false;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -35,7 +26,7 @@ public class FieldOfViewScript : MonoBehaviour
 
     private void Update()
     {
-        if (currentlyPushing)
+        if (detectionRunning)
             return;
 
         if (!playerInside)
@@ -53,37 +44,30 @@ public class FieldOfViewScript : MonoBehaviour
         if (!moving)
             return;
 
-        StartCoroutine(PushPlayerRoutine());
+        StartCoroutine(DetectionRoutine());
     }
 
-    private IEnumerator PushPlayerRoutine()
+    private IEnumerator DetectionRoutine()
     {
-        currentlyPushing = true;
+        detectionRunning = true;
+
+        PlayerScript player =
+            GameObject.FindGameObjectWithTag("Player")
+            .GetComponent<PlayerScript>();
+
+        player.isBeingPushed = true;
 
         guard.TriggerDetection();
 
-        Rigidbody2D rb = player.GetComponent<Rigidbody2D>();
-
-        float pushDuration = guard.caughtSound != null
+        float duration =
+            guard.caughtSound != null
             ? guard.caughtSound.length
-            : 0.5f;
+            : 1f;
 
-        float timer = 0f;
+        yield return new WaitForSeconds(duration);
 
-        while (timer < pushDuration)
-        {
-            if (rb != null)
-            {
-                rb.linearVelocity = new Vector2(
-                    -pushSpeed,
-                    rb.linearVelocity.y
-                );
-            }
+        player.isBeingPushed = false;
 
-            timer += Time.deltaTime;
-            yield return null;
-        }
-
-        currentlyPushing = false;
+        detectionRunning = false;
     }
 }

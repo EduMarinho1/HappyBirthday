@@ -4,6 +4,11 @@ public class PlayerScript : MonoBehaviour
 {
     public float speed = 3f;
 
+    [HideInInspector]
+    public bool isBeingPushed = false;
+
+    private float pushLeftSpeed = 4f;
+
     private bool onFastPad = false;
     private bool onSlowPad = false;
 
@@ -27,6 +32,16 @@ public class PlayerScript : MonoBehaviour
 
     void Update()
     {
+        if (isBeingPushed)
+        {
+            transform.position += Vector3.left * pushLeftSpeed * Time.deltaTime;
+
+            lastDirection = Direction.Left;
+            PlayAnimation("WalkLeft");
+
+            return;
+        }
+
         float currentSpeed = speed;
 
         if (onSlowPad)
