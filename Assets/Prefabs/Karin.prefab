@@ -12,6 +12,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Karin
       objectReference: {fileID: 0}
+    - target: {fileID: -2253911629886400664, guid: b55ff2b0ba2c55d41966f7817f8baa62, type: 3}
+      propertyPath: m_TagString
+      value: Character
+      objectReference: {fileID: 0}
     - target: {fileID: 3626916397498700004, guid: b55ff2b0ba2c55d41966f7817f8baa62, type: 3}
       propertyPath: m_SortingLayer
       value: 6

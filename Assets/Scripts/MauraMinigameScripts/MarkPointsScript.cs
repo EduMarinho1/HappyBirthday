@@ -136,23 +136,36 @@ public class MarkPointsScript : MonoBehaviour
         }
     }
 
+    private void SetFeedback(
+        SpriteRenderer feedbackRenderer,
+        Sprite sprite,
+        ref float feedbackTimer
+    )
+    {
+        if (feedbackRenderer == null)
+            return;
+
+        feedbackRenderer.sprite = sprite;
+        feedbackTimer = 0.5f;
+    }
+
     private void UpdateFeedbackTimers()
     {
         redFeedbackTimer -= Time.deltaTime;
         greenFeedbackTimer -= Time.deltaTime;
         blueFeedbackTimer -= Time.deltaTime;
 
-        if (redFeedbackTimer <= 0)
+        if (redFeedback != null && redFeedbackTimer <= 0)
         {
             redFeedback.sprite = null;
         }
 
-        if (greenFeedbackTimer <= 0)
+        if (greenFeedback != null && greenFeedbackTimer <= 0)
         {
             greenFeedback.sprite = null;
         }
 
-        if (blueFeedbackTimer <= 0)
+        if (blueFeedback != null && blueFeedbackTimer <= 0)
         {
             blueFeedback.sprite = null;
         }
@@ -201,17 +214,13 @@ public class MarkPointsScript : MonoBehaviour
         if (Input.GetKey(key))
         {
             Debug.Log("Excellent " + color);
-
-            feedbackRenderer.sprite = excellentSprite;
+            SetFeedback(feedbackRenderer, excellentSprite, ref feedbackTimer);
         }
         else
         {
             Debug.Log("Missed " + color);
-
-            feedbackRenderer.sprite = missSprite;
+            SetFeedback(feedbackRenderer, missSprite, ref feedbackTimer);
         }
-
-        feedbackTimer = 0.5f;
 
         Destroy(fireTrace);
     }
@@ -250,49 +259,44 @@ public class MarkPointsScript : MonoBehaviour
         {
             Debug.Log("Missed " + color);
 
-            feedbackRenderer.sprite = missSprite;
-            feedbackTimer = 0.5f;
+            SetFeedback(feedbackRenderer, missSprite, ref feedbackTimer);
 
             cooldown = 0.5f;
-
             return;
         }
 
         if (count == 1)
         {
             Debug.Log("Good " + color);
-
-            feedbackRenderer.sprite = goodSprite;
-            feedbackTimer = 0.5f;
+            SetFeedback(feedbackRenderer, goodSprite, ref feedbackTimer);
         }
         else if (count == 2)
         {
             Debug.Log("Great " + color);
-
-            feedbackRenderer.sprite = greatSprite;
-            feedbackTimer = 0.5f;
+            SetFeedback(feedbackRenderer, greatSprite, ref feedbackTimer);
         }
         else if (count == 3)
         {
             Debug.Log("Excellent " + color);
-
-            feedbackRenderer.sprite = excellentSprite;
-            feedbackTimer = 0.5f;
+            SetFeedback(feedbackRenderer, excellentSprite, ref feedbackTimer);
         }
 
         if (line1.currentButton != null)
         {
             Destroy(line1.currentButton);
+            line1.currentButton = null;
         }
 
         if (line2.currentButton != null)
         {
             Destroy(line2.currentButton);
+            line2.currentButton = null;
         }
 
         if (line3.currentButton != null)
         {
             Destroy(line3.currentButton);
+            line3.currentButton = null;
         }
     }
 }

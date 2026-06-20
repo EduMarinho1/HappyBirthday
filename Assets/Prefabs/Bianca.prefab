@@ -12,6 +12,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Bianca
       objectReference: {fileID: 0}
+    - target: {fileID: -2253911629886400664, guid: 1fe7e99631f633747af522f6bc1c8c88, type: 3}
+      propertyPath: m_TagString
+      value: Character
+      objectReference: {fileID: 0}
     - target: {fileID: 3626916397498700004, guid: 1fe7e99631f633747af522f6bc1c8c88, type: 3}
       propertyPath: m_SortingLayer
       value: 6
